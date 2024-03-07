@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js?ver=3.4.1"></script>
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.autoKana.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/change_kana.js') }}"></script>
+    <title>新規登録 | ANCHOR</title>
+</head>
+
+<body>
+    <div class="register_contents">
+        {% if error_msg %}
+        <ul class="error_ul">
+            {% for error in error_msg %}
+                <li class="error_items">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <h3 class="title">ANCHOR</h3>
+        <form action="" method="post" class="h-adr">
+            <span class="p-country-name" style="display:none;">Japan</span>
+            <h1 class="register_title">新規ユーザー登録</h1>
+                <h2 class="register_category">基本情報<br> <span style="color:red;">*</span>がついているものは必須です。</h2>
+    
+                    <p class="register_input_title">氏名</p>
+                        <div class="register_input_item">
+                            <input type="text" name="first_name" placeholder="姓" required>
+                            <input type="text" name="last_name"  placeholder="名" required>
+                        </div><!--register_input_item-->
+    
+                    <p class="register_input_title">氏名（かな）</p>
+                        <div class="register_input_item">
+                            <input type="text" name="first_name_kana" placeholder="せい" required>
+                            <input type="text" name="last_name_kana"  placeholder="めい" required>
+                        </div><!--register_input_item-->
+    
+                    <p class="register_input_title">電話番号※携帯・固定電話可</p>
+                        <div class="register_input_item">
+                            <input type="tel" name="tel" pattern="\d{2,4}-\d{3,4}-\d{3,4}"  placeholder="012-3456-7890" required>
+                        </div><!--register_input_item-->
+                    
+                    <p class="register_input_title">メールアドレス</p>
+                        <div class="register_input_item">
+                            <input type="email" name="mail"   pattern="^[a-zA-Z0-9.!#$&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$"  placeholder="sample@company.com" required>
+                        </div><!--register_input_item-->
+    
+                    <p class="register_input_title">性別</p>
+                        <div class="register_input_radio">
+                            <span><input type="radio" name="sex" value="1">男性</span>
+                            <span><input type="radio" name="sex" value="2">女性</span>
+                            <span><input type="radio" name="sex" value="99">その他</span>
+                        </div>
+    
+                    <p class="register_input_title">生年月日</p>
+                        <div class="register_input_item">
+                            <input type="number" pattern="\d{4}" placeholder="2000"required min="1800" max="2024" maxlength="4" minlength="4" name="b_year" class="size-1">
+                            <input type="number" pattern="\d{2}" placeholder="01"  required min="01" max="12" maxlength="2" minlength="2" name="b_month" class="size-1">
+                            <input type="number" pattern="\d{2}" placeholder="01"  required min="01" max="31" maxlength="2" minlength="2"name="b_day" class="size-1">
+
+                        </div><!--register_input_item-->
+    
+                    <p class="register_input_title">〒郵便番号</p>
+                        <div class="register_input_item">
+                            <input type="text" pattern="\d{3}-\d{4}" placeholder="160-0023" class="p-postal-code" required minlength="8" maxlength="8" name="postcode">
+                        </div><!--register_input_item-->           
+    
+                    <p class="register_input_title">都道府県</p>
+                        <div class="register_input_item">
+                            <input type="text" placeholder="東京都"  class="p-region" required name="add1">
+                        </div><!--register_input_item-->   
+    
+                        <p class="register_input_title">市区町村</p>
+                        <div class="register_input_item">
+                            <input type="text" placeholder="新宿区"  class="p-locality"required name="add2">
+                        </div><!--register_input_item-->   
+    
+                        <p class="register_input_title">町名・番地</p>
+                        <div class="register_input_item">
+                            <input type="text" placeholder="西新宿1-7-3" class="p-street-address" required name="add3">
+                        </div><!--register_input_item-->   
+    
+                        <p class="register_input_title Any">建物名・号室</p>
+                        <div class="register_input_item">
+                            <input type="text" class="p-extended-address" placeholder="総合校舎コクーンタワー" name="add4">
+                        </div><!--register_input_item-->
+    
+                        <p class="register_input_title">所属オフィス</p>
+                        <div class="register_input_item">
+                            <select name="office">
+                                <option value="null" selected>オフィスを選択してください。</option>
+                                <option value="東京本社">東京本社</option>
+                                <option value="大阪支社">大阪支社</option>
+                                <option value="名古屋支社">名古屋支社</option>
+                                <option value="福岡支社">福岡支社</option>
+                            </select>
+                        </div><!--register_input_item-->
+    
+                        <p class="register_input_title">所属部署</p>
+                        <div class="register_input_item">
+                            <select name="group">
+                                <option value="null" selected>部署を選択してください。</option>
+                                <option value="情報システム部">情報システム部</option>
+                                <option value="人事部">人事部</option>
+                                <option value="経理部">経理部</option>
+                                <option value="総務部">総務部</option>
+                                <option value="営業部">営業部</option>
+                                <option value="開発部">開発部</option>
+                                <option value="事業本部">事業本部</option>
+                            </select>
+                        </div><!--register_input_item-->
+
+                        <p class="register_input_title">役職ロール</p>
+                        <div class="register_input_item">
+                            <select name="role">
+                                <option value="-">ロールを選択してください。</option>
+                                <option value="01">代表取締役社長</option>
+                                <option value="02">副社長</option>
+                                <option value="03">専務取締役</option>
+                                <option value="04">常務取締役</option>
+                                <option value="05">取締役</option>
+                                <option value="06">事業部長</option>
+                                <option value="07">部長</option>
+                                <option value="08">課長</option>
+                                <option value="09">主任</option>
+                                <option value="10">一般社員</option>
+                                <option value="11">契約社員</option>
+                                <option value="12">アルバイト</option>
+                                <option value="13">業務委託</option>
+                            </select>
+                        </div>
+
+                        <p class="register_input_title">入社日</p>
+                        <div class="register_input_item">
+                            <select name="j_year">
+                                <option value="null" selected>-</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+
+                            <select name="j_month">
+                                <option value="null" selected>-</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+
+                            <select name="j_day">
+                                <option value="null" selected>-</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div><!--register_input_item-->
+                                                
+                        <!--登録ボタン-->
+
+                        <div class="register_submit_item">
+                            <input type="submit" value="登録する" class="submit_btn">
+                        </div>
+
+                        <small class="copyright">© 2024 ANCHOR lnc.</small>
+                    </div>
+                    
+</body>
+
+</html>

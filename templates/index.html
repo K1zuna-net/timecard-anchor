@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/timer.js') }}"></script>
+    <title>打刻メニュー | ANCHOR</title>
+</head>
+<body>
+    <div class="center_contents">
+
+        <form action="" method="post">
+            <div class="btn_flex">
+                <input type="submit" value="勤怠管理" class="index_button timecard" name="Attendance">
+                <input type="submit" value="上長申請" class="index_button timecard" name="request">
+                <input type="submit" value="個人設定" class="index_button timecard" name="settings">
+            </div>
+
+            <hr>
+            <h1 class="title">ANCHOR</h1>
+            <p>{{session['user'][1]}}{{session['user'][12]  + session['user'][13]}}</p>
+            <h1 class="username">{{session['user'][2]}}</h1>
+
+            {% if error_msg %}
+            <ul class="error_ul">
+                {% for error in error_msg %}
+                    <li class="error_items">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        <p id="time"></p>
+        <hr>
+
+        <div class="btn_flex">
+            <input type="submit" value="出勤" class="index_button timecard" name="r_attendance">
+            <input type="submit" value="退勤" class="index_button timecard" name="work-out">
+        </div>
+        
+        <div class="btn_flex">
+            
+            <input type="submit" value="ログアウト" class="index_button timecard" name="logout">
+        </div>
+        
+        </form>
+    </div>
+</body>
+</html>
+
+

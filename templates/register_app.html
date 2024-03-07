@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>認証アプリ登録 | ANCHOR</title>
+</head>
+
+<body>
+    <div class="register_contents">
+        <h1 class="title">ANCHOR</h1>
+
+        {% if error_msg %}
+        <ul class="error_ul">
+            {% for error in error_msg %}
+                <li class="error_items">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <form action="" method="post">
+            <h1 class="register_title">認証アプリ登録</h1>
+
+            <p class="register_input_title Any">1.お好きな認証アプリをダウンロードしてください。（ほとんどのアプリは無料提供）</p>
+            <p class="register_input_title Any">2.認証アプリにて、新規アカウント作成か、既存アカウントにログインしてください。</p>
+            <p class="register_input_title Any">3.下記に表示されているQRコードを認証アプリでスキャンしてください。</p>
+            <p class="register_input_title Any">4.スキャンすると画面が変わり、表示名を好きに変え保存してください。</p>
+            <p class="register_input_title Any">5.保存後、一度コードを下記のテキストボックスに入力し、登録ボタンを押してください。</p>
+
+
+            <img src="{{ url_for('static', filename='img/register_app.png') }}" alt="登録用QRコード">
+
+            <p class="register_input_title">認証コード</p>
+            <div class="register_input_item">
+                <input type="text" placeholder="000000"equired minlength="6" maxlength="6" name="app_authcode">
+            </div><!--register_input_item-->   
+            <!--登録ボタン-->
+
+            <div class="register_submit_item">
+                <input type="submit" value="登録する" name="f_settings"class="submit_btn">
+            </div>
+
+            <small class="copyright">© 2024 ANCHOR lnc.</small>
+    </div>
+    </form>
+</body>
+
+</html>
+

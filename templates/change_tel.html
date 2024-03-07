@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>電話番号変更 | ANCHOR</title>
+</head>
+
+<body>
+    <div class="center_contents">
+
+
+        {% if error_msg %}
+        <ul class="error_ul">
+            {% for error in error_msg %}
+                <li class="error_items">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    
+        
+    <h1 class="title">ANCHOR</h1>
+    <h1 class="register_title">認証コード確認</h1>
+    <h2 class="register_category"><span style="color:red;">*</span>がついているものは必須です。</h2>
+    <h2 class="register_category">SMS認証に登録する電話番号を入力してください。<br>（※日本の電話番号のみ使用可能）</h2>
+        <form action="" method="post">
+
+                <!--電話番号-->
+                <p class="register_input_title">電話番号</p>
+                <div class="register_input_item">
+                    <input type="tel" name="tel" pattern="\d{2,4}-\d{3,4}-\d{3,4}"  placeholder="012-3456-7890" required>
+                </div><!--register_input_item--> 
+                
+                <div class="register_submit_item">
+                    <input type="submit" value="登録する" class="submit_btn">
+                </div>
+        </form>
+    </div>
+</body>
+
+</html>

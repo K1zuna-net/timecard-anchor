@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/mobile.css') }}"  media="screen and (max-width: 600px)"><!-- 768px以下 -->
+    <script type="text/javascript" src="{{ url_for('static', filename='/js/news.js') }}"></script>
+
+    <title>ログイン | ANCHOR</title>
+</head>
+
+
+<body>
+    <div class="center_contents">
+        <div class="login">
+            <h1 class="title">ANCHOR</h1>
+
+            <form action="" method="post">
+                <div class="login_left_contents">
+    
+                    <p>利用者用ログインページ</p>
+    
+                    {% if error_msg %}
+                    <ul class="error_ul">
+                        {% for error in error_msg %}
+                            <li class="error_items">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+    
+                    <div class="login_input_items">
+                        <!--メールアドレス-->
+                        <input type="email" name="mail" required placeholder="メールアドレス" class="login_input_margin">
+                    </div>
+        
+                    <div class="login_input_items">
+                        <!--パスワード-->
+                        <input type="password" name="password" required placeholder="パスワード" class="login_input_margin">
+                    </div>
+        
+                    <div class="login_submit_items">
+                        <!--ログインボタン-->
+                        <input type="submit" value="ログインする" name="login" class="btn_style submit_btn">
+                    </div>
+                    <h4 class="forgat_password">パスワードを忘れた方は<a href="http://">こちら</a></h4>
+
+                
+                </div><!--login_left_contents-->
+    
+                <div class="login_right_contents">
+    
+                    <p>最新のセキュリティーニュース</p>
+                    <div id="news-container"></div>
+                    <small class="copyright">© 2024 ANCHOR lnc.</small>
+
+                </div><!--login_right_contents-->
+            </form>
+        </div>
+    </div><!--items-->
+
+
+
+    
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>個人設定 | ANCHOR</title>
+</head>
+
+<body>
+    <div class="register_contents">
+        <h1 class="title">ANCHOR</h1>
+
+        {% if error_msg %}
+        <ul class="error_ul">
+            {% for error in error_msg %}
+                <li class="error_items">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        <form action="" method="post">
+            <h1 class="register_title">個人設定</h1>
+
+            <p class="register_input_title">登録されているメールアドレス</p>
+            <div class="register_input_item">
+                <input type="email" name="register_email"required value="{{ session['user'][5] }}"  disabled>
+            </div><!--register_input_item-->
+
+            <p class="register_input_title">登録されている電話番号 
+                {% if session['user'][20] == 1 %}
+                    <span  class="db_info">認証形式選択済み</span>
+                {% else %}
+                    <span>認証形式未選択</span>
+                {% endif %}
+            </p>
+
+            <div class="register_input_item">
+                <input type="tel"name="tel"required value="{{ tel }}" disabled>
+                <div class="btn_flex">
+                    <input type="submit" value="送信テスト" class="index_button timecard" name="confirm_sms">
+                    <input type="submit" value="変更する" class="index_button timecard" name="change_tel">
+                </div>
+            </div><!--register_input_item-->
+
+
+            <p class="register_input_title">ICカード登録状況 
+                {% if session['user'][21] == 1 %}
+                <span class="db_info">認証形式選択済み</span>
+                {% else %}
+                <span>認証形式未選択</span>
+                {% endif %}
+            </p>
+            <div class="register_input_item">
+                <input type="text"name="idm"required value="{{ idm }}" disabled>
+                <div class="btn_flex">
+                    {% if session['user'][24] == "" %}
+                    <input type="submit" value="登録する" class="index_button timecard" name="scan_ic">
+                    {% endif %}
+                    <input type="submit" value="変更する" class="index_button timecard" name="change_ic">
+                </div>
+            </div><!--register_input_item-->
+
+            <p class="register_input_title">認証アプリ登録情報 
+                {% if session['user'][22] == 1 %}
+                <span class="db_info">認証形式選択済み</span>
+                {% else %}
+                <span>認証形式未選択</span>
+                {% endif %}
+            </p>
+
+                <div class="btn_flex">
+                    <input type="submit" value="追加登録する" class="index_button timecard" name="r_app">
+                </div>
+
+                <p class="register_input_title">ログイン認証形式</p>
+                <div class="register_input_radio settings">
+                    <span><input type="radio" name="auth_format" value="sms"{% if session['user'][20] == 1 %}checked{% endif %}>SMS認証</span>
+                    <span><input type="radio" name="auth_format" value="card" {% if session['user'][21] == 1 %}checked{% endif %}>ICカード認証</span>
+                    <span><input type="radio" name="auth_format" value="app" {% if session['user'][22] == 1 %}checked{% endif %} disabled="disabled">認証アプリ認証</span>
+                </div>
+            <!--登録ボタン-->
+
+            <div class="register_submit_item">
+                <input type="submit" value="登録する" name="f_settings"class="submit_btn">
+            </div>
+
+            <small class="copyright">© 2024 ANCHOR lnc.</small>
+    </div>
+    </form>
+</body>
+
+</html>
+

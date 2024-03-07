@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js?ver=3.4.1"></script>
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.autoKana.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/change_kana.js') }}"></script>
+    <title>新規登録 | ANCHOR</title>
+</head>
+<body>
+<div class="register_contents">
+
+    {% if error_msg %}
+    <ul>
+        {% for error in error_msg %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <h3 class="title">ANCHOR</h3>
+    <form action="" method="post" class="h-adr">
+        <span class="p-country-name" style="display:none;">Japan</span>
+        <h1 class="register_title">ユーザー情報確認・変更</h1>
+        <h2 class="register_category">下記の検索条件のいずれか１つを必ず埋めてください。</h2>
+
+        <p class="register_input_title Any">社員番号</p>
+        <div class="register_input_item">
+            <input type="text" name="s_staff_id" placeholder="000000">
+        </div><!--register_input_item-->
+
+        <p class="register_input_title Any">氏名</p>
+        <div class="register_input_item">
+            <input type="text" name="full_name" placeholder="姓名">
+        </div><!--register_input_item-->
+
+        <p class="register_input_title Any">所属オフィス</p>
+        <div class="register_input_item">
+            <select name="s_office">
+                <option value="" selected>オフィスを選択してください。</option>
+                <option value="東京本社">東京本社</option>
+                <option value="大阪支社">大阪支社</option>
+                <option value="名古屋支社">名古屋支社</option>
+                <option value="福岡支社">福岡支社</option>
+            </select>
+        </div><!--register_input_item-->
+
+        <p class="register_input_title Any">所属部署</p>
+        <div class="register_input_item">
+            <select name="s_group">
+                <option value="" selected>部署を選択してください。</option>
+                <option value="情報システム部">情報システム部</option>
+                <option value="人事部">人事部</option>
+                <option value="経理部">経理部</option>
+                <option value="総務部">総務部</option>
+                <option value="営業部">営業部</option>
+                <option value="開発部">開発部</option>
+                <option value="事業本部">事業本部</option>
+            </select>
+        </div><!--register_input_item-->
+
+        <!--登録ボタン-->
+        <div class="register_submit_item">
+            <input type="submit" value="登録する" class="submit_btn">
+        </div>
+
+        <small class="copyright">© 2024 ANCHOR lnc.</small>
+    </form>
+</div>
+
+{% if result %}
+<h1>ユーザー情報検索結果</h1>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>社員番号</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>電話番号</th>
+            <th>所属オフィス</th>
+            <th>所属部署</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in result %}
+            <tr>
+                <td>
+                    <input type="hidden" name="staff_id" value="{{ row[1] }}"> <!-- 社員番号を隠しフィールドに設定 -->
+                    <input type="submit" value="変更">
+                </td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[12] }}</td>
+                <td>{{ row[13] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>検索結果がありません。</p>
+{% endif %}
+
+</body>
+</html>

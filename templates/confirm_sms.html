@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/style.css') }}">
+    <title>SMS認証 | ANCHOR</title>
+</head>
+
+<body>
+    <div class="center_contents">
+
+
+        {% if error_msg %}
+        <ul class="error_ul">
+            {% for error in error_msg %}
+                <li class="error_items">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+        <h1 class="title">ANCHOR</h1>
+        <h1 class="register_title">認証コード確認</h1>
+        <h2 class="register_category"><span style="color:red;">*</span>がついているものは必須です。</h2>
+        <h2 class="register_category">SMSに記載の認証コードを入力してください。</h2>
+        <form action="" method="post">
+                
+                    <p class="register_input_title">認証コード</p>
+                        <div class="register_input_item">
+                            <input type="text" name="authcode" placeholder="000000" minlength="6" maxlength="6" required>
+                        </div><!--register_input_item-->
+
+                        <div class="register_submit_item">
+                            <input type="submit" value="送信する" class="submit_btn">
+                        </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center; 
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            white-space: nowrap; /* テキストを折り返さない */
+            text-overflow: ellipsis; /* 溢れた部分を省略記号で省略 */
+            max-width: auto; /* 最大幅 */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Staff List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>社員番号</th>
+                <th>氏名</th>
+                <th>メールアドレス</th>
+                <th>〒郵便番号</th>
+                <th>住所</th>
+                <th>電話番号</th>
+                <th>認証コード</th>
+                <th>生年月日</th>
+                <th>性別</th>
+                <th>所属オフィス</th>
+                <th>所属部署</th>
+                <th>入社日</th>
+                <th>退社日</th>
+                <th>アカウント作成日</th>
+                <th>情報更新日</th>
+                <th>login_flag</th>
+                <th>password_flag</th>
+                <th>sms_flag</th>
+                <th>card_flag</th>
+                <th>app_flag</th>
+                <th>role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if user_data %}
+                {% for row in user_data %}
+                    <tr>
+                        <td>
+                            <form action="/update" method="post">
+                                <input type="hidden" name="staff_id" value="{{ row[1] }}">
+                                <input type="submit" value="情報変更">
+                            </form>
+                        </td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>{{ row[8] }}</td>
+                        <td>{{ row[9] }}</td>
+                        <td>{{ row[10] }}</td>
+                        <td>{{ row[11] }}</td>
+                        <td>{{ row[12] }}</td>
+                        <td>{{ row[13] }}</td>
+                        <td>{{ row[14] }}</td>
+                        <td>{{ row[15] }}</td>
+                        <td>{{ row[16] }}</td>
+                        <td>{{ row[17] }}</td>
+                        <td>{{ row[18] }}</td>
+                        <td>{{ row[19] }}</td>
+                        <td>{{ row[20] }}</td>
+                        <td>{{ row[21] }}</td>
+                        <td>{{ row[22] }}</td>
+                        <td>{{ row[23] }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="21">データがありません</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    {% if error_msg %}
+        <div>
+            <h2>エラー:</h2>
+            <ul>
+                {% for error in error_msg %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>
